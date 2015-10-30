@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tm.davidwang.dwpop_up.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/top_lin"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:weightSum="3"
+        >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="Onclick_0"
+                android:text="点我弹出" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="Onclick_1"
+                android:text="点我弹出1"
+                />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="Onclick_2"
+                android:text="点我弹出2"
+                />
+        </LinearLayout>
+
+    <tm.davidwang.dwpop_up.DWPOPView
+        android:id="@+id/line1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#50000000"
+        android:layout_below="@+id/top_lin"
+        >
+
+        </tm.davidwang.dwpop_up.DWPOPView>
+
+
+</RelativeLayout>
