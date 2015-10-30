@@ -1,9 +1,11 @@
 package tm.davidwang.dwpop_up;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -37,23 +39,33 @@ public class DWPOPView extends LinearLayout {
     }
 
     private void init(){
-        setVisibility(View.GONE);
-        mSpring.setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(1, 5));
+        setBackgroundColor(Resources.getSystem().getColor(android.R.color.transparent));
+        mSpring.setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(qcTension, qcFriction));
         mSpring.setEndValue(1);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                setBackgroundColor(0x50000000);
+                setVisibility(View.GONE);
+            }
+        }, 200);
     }
 
     public void setAdapterView(View view){
         this.addView(view);
         this.addview = view;
         init();
-        mSpring.setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(qcTension, qcFriction));
     }
 
     public void setAdapterView(View view,double qcTension,double qcFriction){
         this.addView(view);
         this.addview = view;
+        this.qcFriction = qcFriction;
+        this.qcTension = qcTension;
         init();
-        mSpring.setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(qcTension,qcFriction));
+    }
+
+    public void setDWBackgroundColor(int color){
+        setBackgroundColor(color);
     }
 
     public void showanimation(){
@@ -78,6 +90,7 @@ public class DWPOPView extends LinearLayout {
             double CurrentValue = spring.getCurrentValue();
             float mappedValue = (float) SpringUtil.mapValueFromRangeToRange(CurrentValue, 0, 1, 1, -move_y);
             addview.setTranslationY(mappedValue);
+            Log.e("哈哈哈-","奇怪的高？-"+mappedValue);
         }
 
         @Override
