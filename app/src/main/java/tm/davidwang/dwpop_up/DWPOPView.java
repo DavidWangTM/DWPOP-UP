@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -44,24 +43,25 @@ public class DWPOPView extends LinearLayout {
         mSpring.setEndValue(1);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                setBackgroundColor(0x50000000);
                 setVisibility(View.GONE);
+                setBackgroundColor(0x50000000);
             }
         }, 200);
     }
 
     public void setAdapterView(View view){
+        if (addview != null){
+            return;
+        }
         this.addView(view);
         this.addview = view;
         init();
     }
 
     public void setAdapterView(View view,double qcTension,double qcFriction){
-        this.addView(view);
-        this.addview = view;
         this.qcFriction = qcFriction;
         this.qcTension = qcTension;
-        init();
+        setAdapterView(view);
     }
 
     public void setDWBackgroundColor(int color){
@@ -69,6 +69,9 @@ public class DWPOPView extends LinearLayout {
     }
 
     public void showanimation(){
+        if(addview == null){
+            return;
+        }
         if (mSpring.getEndValue() == 0){
             mSpring.setEndValue(1);
             new Handler().postDelayed(new Runnable() {
@@ -90,7 +93,6 @@ public class DWPOPView extends LinearLayout {
             double CurrentValue = spring.getCurrentValue();
             float mappedValue = (float) SpringUtil.mapValueFromRangeToRange(CurrentValue, 0, 1, 1, -move_y);
             addview.setTranslationY(mappedValue);
-            Log.e("哈哈哈-","奇怪的高？-"+mappedValue);
         }
 
         @Override
