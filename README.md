@@ -6,6 +6,11 @@ Android 弹出框，类似淘宝菜单弹出框
 
 Installation
 --------------
+###important
+重要的事情说三遍
+一定要让外层view显示的情况下setAdapterView(View view).
+一定要让外层view显示的情况下setAdapterView(View view).
+一定要让外层view显示的情况下setAdapterView(View view).
 ###compile
 ```
 compile 'com.facebook.rebound:rebound:0.3.8'
